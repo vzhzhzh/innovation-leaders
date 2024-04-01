@@ -1,0 +1,1328 @@
+@import './_reset.scss';
+@import './_mixins.scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+@font-face {
+	font-family: 'Druk Text Wide Cyr';
+	src: local('Druk Text Wide Cyr'), url('../fonts/druktextwidecyr-medium.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	max-width: 100vw;
+	height: 100%;
+	overflow-x: hidden;
+	font-family: 'Druk Text Wide Cyr';
+	font-weight: 500;
+}
+
+#root {
+	height: 100%;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: #0c0c0c;
+	color: #ffffff;
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.body {
+	&.stop {
+		overflow: hidden;
+	}
+}
+
+.container {
+	position: relative;
+	width: 1230px;
+	margin: 0 auto;
+	height: 100%;
+	@include r(xxl) {
+		width: 1140px;
+	}
+	@include r(xl) {
+		width: 960px;
+	}
+	@include r(l) {
+		width: 720px;
+	}
+	@include r(m) {
+		width: 540px;
+	}
+	@include r(s) {
+		width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+.hover {
+	opacity: 1;
+	transition: opacity 0.3s ease;
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+.header {
+	position: relative;
+	z-index: 11;
+	height: 90px;
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	&_bg {
+		height: 100%;
+		position: relative;
+		&_img {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			object-fit: cover;
+		}
+	}
+
+	&_content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&_logo {
+		width: 50px;
+		height: 50px;
+		object-fit: contain;
+	}
+
+	&_caution {
+		width: 30px;
+		height: 30px;
+		object-fit: contain;
+		@include r(s) {
+			width: 20px;
+			height: 20px;
+		}
+		&--alt {
+			@include r(l) {
+				display: none;
+			}
+			&2 {
+				display: none;
+				@include r(l) {
+					display: block;
+					margin-left: auto;
+					margin-right: auto;
+				}
+			}
+		}
+	}
+	&_toggle {
+		cursor: pointer;
+		width: 43px;
+		height: 30px;
+		@include r(s) {
+			width: 30px;
+			height: 20px;
+		}
+
+		&[data-toggle='close'] {
+			display: none;
+		}
+
+		&.open {
+			&[data-toggle='open'] {
+				display: none;
+			}
+			&[data-toggle='close'] {
+				display: block;
+			}
+		}
+	}
+}
+
+.archive {
+	padding-left: 100px;
+	padding-right: 100px;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	@include r(m) {
+		gap: 20px;
+	}
+	&_title {
+		text-transform: uppercase;
+		font-size: 30px;
+		@include r(l) {
+			font-size: 24px;
+		}
+		@include r(s) {
+			font-size: 18px;
+		}
+	}
+	&_ul {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 30px;
+		@include r(m) {
+			gap: 15px;
+		}
+	}
+	&_link {
+		text-transform: uppercase;
+		font-size: 40px;
+		color: #cfcfcf;
+		transition: all 0.3s ease;
+		@include r(xl) {
+			font-size: 30px;
+		}
+		@include r(m) {
+			font-size: 20px;
+		}
+		@include r(s) {
+			font-size: 18px;
+		}
+		&:hover {
+			color: #c1a875;
+		}
+	}
+}
+
+.main {
+	position: relative;
+}
+.menu {
+	padding-top: 90px;
+	// margin-top: 90px;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+
+	background: #0c0c0c;
+	top: 0;
+	left: 0;
+
+	transform: translateX(-100%);
+	transition: all 0.3s ease;
+
+	&.active {
+		transform: translateX(0);
+	}
+
+	&_content {
+		display: grid;
+		align-content: space-between;
+		gap: 60px;
+
+		height: 100%;
+
+		padding-top: 60px;
+		padding-bottom: 60px;
+		overflow-y: auto;
+
+		max-height: 650px;
+	}
+
+	&_ul {
+		margin: 0 auto;
+
+		display: grid;
+		justify-content: center;
+		gap: 20px;
+		max-width: max-content;
+	}
+	&_li {
+		text-align: center;
+	}
+	&_link {
+		text-transform: uppercase;
+		font-size: 40px;
+		transition: all 0.3s ease;
+		@include r(xl) {
+			font-size: 30px;
+		}
+		@include r(m) {
+			font-size: 20px;
+		}
+		&:hover {
+			color: #c1a875;
+		}
+	}
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	text-transform: uppercase;
+	@include r(s) {
+		gap: 5px;
+	}
+	&--footer {
+		@include r(m) {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+	&_pic {
+		width: 50px;
+		height: 50px;
+		object-fit: contain;
+		@include r(s) {
+			width: 30px;
+			height: 30px;
+		}
+	}
+	&_text {
+		display: flex;
+		flex-direction: column;
+		&_main {
+			font-size: 20px;
+			@include r(m) {
+				font-size: 14px;
+			}
+			@include r(s) {
+				font-size: 10px;
+			}
+		}
+		&_sub {
+			font-size: 16px;
+			@include r(m) {
+				font-size: 12px;
+			}
+			@include r(s) {
+				font-size: 6px;
+			}
+		}
+	}
+}
+
+.hero {
+	position: relative;
+	height: 100%;
+	max-height: 810px;
+	@include r(l) {
+		max-height: 680px;
+	}
+	&_bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	&_content {
+		height: 100%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		padding-top: 100px;
+		padding-bottom: 80px;
+
+		@include r(l) {
+			padding-top: 70px;
+			padding-bottom: 70px;
+		}
+		@include r(s) {
+			padding-top: 95px;
+			padding-bottom: 95px;
+		}
+	}
+	&_title {
+		font-size: 82px;
+		text-transform: uppercase;
+		@include r(xxl) {
+			font-size: 64px;
+		}
+		@include r(xl) {
+			font-size: 56px;
+		}
+		@include r(l) {
+			font-size: 48px;
+		}
+		@include r(s) {
+			font-size: 28px;
+		}
+	}
+
+	&_poster {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: 30px;
+		justify-content: space-between;
+		@include r(l) {
+			gap: 60px;
+		}
+	}
+	&_ticket {
+		position: relative;
+		display: grid;
+		gap: 55px;
+		max-width: 780px;
+
+		padding-top: 40px;
+		padding-bottom: 40px;
+		padding-right: 40px;
+		@include r(l) {
+			gap: 40px;
+		}
+		@include r(s) {
+			gap: 30px;
+		}
+		&_info {
+			display: flex;
+			gap: 30px;
+			align-items: flex-end;
+			@include r(m) {
+				flex-wrap: wrap;
+				gap: 10px;
+			}
+		}
+		&_bg {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			@include r(l) {
+				height: 115%;
+				bottom: 50%;
+				transform: translate(0, 50%);
+			}
+			@include r(m) {
+				height: 100%;
+				width: 130%;
+				flex-wrap: wrap;
+				object-fit: contain;
+			}
+			@include r(s) {
+				width: unset;
+				height: 100%;
+			}
+		}
+	}
+	&_name {
+		position: relative;
+		text-transform: uppercase;
+		font-size: 40px;
+		@include r(l) {
+			font-size: 30px;
+		}
+		@include r(m) {
+			font-size: 20px;
+		}
+		@include r(s) {
+			font-size: 14px;
+		}
+	}
+	&_date {
+		position: relative;
+		text-transform: uppercase;
+		font-size: 60px;
+		line-height: 45px;
+		color: rgba(255, 255, 255, 0.03);
+		min-width: max-content;
+		@include r(xl) {
+			font-size: 50px;
+		}
+		@include r(m) {
+			font-size: 40px;
+		}
+		&_logo {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+	&_address {
+		text-transform: uppercase;
+		position: relative;
+		// width: max-content;
+	}
+}
+
+.nominations {
+	max-width: 1920px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 80px;
+	padding-bottom: 90px;
+	position: relative;
+	&_bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 50%;
+		height: 100%;
+		@include r(xl) {
+			object-fit: cover;
+		}
+		@include r(l) {
+			display: none;
+		}
+	}
+	&_title {
+		text-transform: uppercase;
+		font-size: 50px;
+		@include r(l) {
+			font-size: 35px;
+		}
+		@include r(s) {
+			font-size: 30px;
+		}
+	}
+
+	&_icon {
+		width: 30px;
+		height: 30px;
+		object-fit: contain;
+	}
+	&_item {
+		// max-width: 100%;
+		// width: 100%;
+		@include r(xl) {
+			height: 14px;
+		}
+		@include r(l) {
+			display: none;
+		}
+	}
+
+	&_ul {
+		margin-top: 70px;
+		display: grid;
+		gap: 30px;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(5, 1fr);
+		grid-template-areas:
+			'one six'
+			'two seven'
+			'three eight'
+			'four nine'
+			'five ten';
+		@include r(s) {
+			grid-template-columns: 1fr;
+			grid-template-areas:
+				'one'
+				'two'
+				'three'
+				'four'
+				'five'
+				'six'
+				'seven'
+				'eight'
+				'nine'
+				'ten';
+		}
+	}
+	&_wrap {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	&_li {
+		&[data-nomination='1'] {
+			grid-area: one;
+		}
+		&[data-nomination='2'] {
+			grid-area: two;
+		}
+		&[data-nomination='3'] {
+			grid-area: three;
+		}
+		&[data-nomination='4'] {
+			grid-area: four;
+		}
+		&[data-nomination='5'] {
+			grid-area: five;
+		}
+		&[data-nomination='6'] {
+			grid-area: six;
+		}
+		&[data-nomination='7'] {
+			grid-area: seven;
+		}
+		&[data-nomination='8'] {
+			grid-area: eight;
+		}
+		&[data-nomination='9'] {
+			grid-area: nine;
+		}
+		&[data-nomination='10'] {
+			grid-area: ten;
+		}
+		&_title {
+			color: #c1a875;
+			font-size: 18px;
+			line-height: 135%;
+			display: none;
+			@include r(l) {
+				font-size: 16px;
+				display: block;
+			}
+		}
+	}
+	&_text {
+		margin-top: 15px;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		@include r(s) {
+			font-size: 12px;
+		}
+	}
+}
+
+.reward {
+	width: 100%;
+	max-width: 1920px;
+
+	display: grid;
+	// width: 100%;
+	grid-template-columns: 680px 1fr;
+	grid-template-rows: max-content;
+	margin-left: auto;
+	margin-right: auto;
+
+	@include r(xxl) {
+		grid-template-columns: calc(100vw - 60%) 1fr;
+	}
+	@include r(m) {
+		grid-template-columns: 1fr;
+	}
+
+	// justify-content: center;
+	&_bg {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		@include r(m) {
+			display: none;
+		}
+
+		&_wrap {
+			padding-left: 18px;
+			padding-right: 18px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		&--alt {
+			display: none;
+			// margin-left: 18px;
+			max-width: 280px;
+			width: 100%;
+			aspect-ratio: 14 / 19;
+			// height: 100%;
+			@include r(m) {
+				display: block;
+			}
+		}
+	}
+
+	&_content {
+		padding-top: 100px;
+		padding-bottom: 100px;
+		padding-left: 100px;
+		padding-right: 100px;
+		background: #c1a875;
+
+		display: grid;
+		align-content: space-between;
+		@include r(xl) {
+			padding-top: 60px;
+			padding-bottom: 60px;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		@include r(s) {
+			padding-top: 40px;
+			padding-bottom: 40px;
+			padding-left: 24px;
+			padding-right: 24px;
+		}
+	}
+	&_ul {
+		max-width: 630px;
+		display: grid;
+		gap: 1rem;
+		@include r(m) {
+			margin-top: 30px;
+			max-width: 100%;
+		}
+	}
+	&_li {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		font-size: 22px;
+		@include r(l) {
+			font-size: 16px;
+		}
+		@include r(s) {
+			font-size: 12px;
+		}
+	}
+	&_info {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		// justify-content: space-between;
+		gap: 65px;
+
+		max-width: 630px;
+		margin-top: 80px;
+		justify-content: flex-end;
+		@include r(l) {
+			margin-top: 50px;
+			gap: 50px;
+		}
+		@include r(m) {
+			max-width: 100%;
+			justify-content: space-between;
+		}
+		@include r(s) {
+			margin-top: 30px;
+			gap: 30px;
+		}
+	}
+	&_winners {
+		width: max-content;
+		display: grid;
+	}
+	&_award {
+		max-width: 250px;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		font-size: 16px;
+		@include r(l) {
+			font-size: 12px;
+		}
+	}
+	&_date {
+		font-size: 25px;
+		line-height: 135%;
+		@include r(l) {
+			font-size: 20px;
+		}
+	}
+
+	&_btn {
+		z-index: 5;
+		cursor: pointer;
+		position: relative;
+		@include r(s) {
+			width: 100%;
+		}
+		&_text {
+			display: block;
+			position: relative;
+			z-index: 2;
+			width: 315px;
+			height: 70px;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			@include r(s) {
+				width: 100%;
+			}
+			&--alt {
+				width: 390px;
+				height: 60px;
+				@include r(s) {
+					width: 100%;
+				}
+			}
+		}
+		&_pic {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 315px;
+			height: 70px;
+			object-fit: cover;
+			@include r(s) {
+				width: 100%;
+			}
+			&--alt {
+				width: 390px;
+				height: 60px;
+				@include r(s) {
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+.video {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	position: relative;
+	z-index: 3;
+	@include r(l) {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+	&_bg {
+		position: absolute;
+		top: -180px;
+		left: 50%;
+
+		transform: translate(-50%, 0);
+		@include r(xxl) {
+			top: 50%;
+			transform: translate(-50%, -50%);
+			// width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+	&_src {
+		width: 100%;
+		aspect-ratio: 123 / 70;
+		// height: 700px;
+		@include r(m) {
+			height: 320px;
+			aspect-ratio: unset;
+			object-fit: cover;
+		}
+	}
+	&_play {
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 2;
+		&.hide {
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+}
+
+.alley {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	position: relative;
+	@include r(l) {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+	&_bg {
+		position: absolute;
+		top: -100px;
+		left: 0;
+		width: 100%;
+		height: 110%;
+		@include r(l) {
+			display: none;
+		}
+	}
+	&_title {
+		text-transform: uppercase;
+		font-size: 50px;
+		@include r(l) {
+			font-size: 35px;
+		}
+		@include r(s) {
+			font-size: 30px;
+		}
+	}
+	&_name {
+		margin-top: 15px;
+		color: #c1a875;
+		display: none;
+		&_svg {
+			margin-top: 15px;
+		}
+	}
+
+	&_company {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		font-size: 12px;
+
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		&_name {
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 500;
+			font-size: 16px;
+		}
+	}
+
+	&_ul {
+		margin-top: 70px;
+		display: grid;
+		gap: 30px;
+		grid-template-columns: repeat(5, 1fr);
+		@include r(xl) {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		@include r(l) {
+			margin-top: 60px;
+		}
+		@include r(m) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		@include r(s) {
+			margin-top: 40px;
+			grid-template-columns: 1fr;
+		}
+	}
+	&_li {
+		display: grid;
+		// grid-auto-rows: max-content;
+		gap: 15px;
+		grid-auto-rows: max-content 1fr;
+		@include r(s) {
+			max-width: 320px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+	&_pic {
+		aspect-ratio: 1/1;
+		width: 100%;
+		// height: 222px;
+	}
+	&_nomination {
+		&_text {
+			margin-top: 5px;
+			display: block;
+			font-family: 'Montserrat', sans-serif;
+			font-weight: 500;
+			font-size: 18px;
+		}
+	}
+}
+
+.register {
+	padding-bottom: 100px;
+
+	&_form {
+		padding-top: 100px;
+		position: relative;
+		max-width: 600px;
+		width: 100%;
+	}
+	&_title {
+		text-transform: uppercase;
+		font-size: 50px;
+		@include r(l) {
+			font-size: 35px;
+		}
+		@include r(s) {
+			font-size: 30px;
+		}
+	}
+	&_contacts {
+		margin-top: 70px;
+	}
+
+	&_ul {
+		margin-top: 30px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+		@include r(s) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&_data {
+		margin-top: 40px;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 30px;
+		max-width: 600px;
+		width: 100%;
+	}
+
+	&_input {
+		padding-top: 14px;
+		padding-bottom: 14px;
+		padding-left: 14px;
+		padding-right: 14px;
+
+		position: relative;
+		width: 100%;
+		height: 50px;
+		border: none;
+		outline: none;
+
+		z-index: 2;
+
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 400;
+		font-size: 14px;
+		@include r(s) {
+			height: 40px;
+			font-size: 12px;
+		}
+		&_wrap {
+			margin-top: 10px;
+			position: relative;
+			@include r(s) {
+				max-width: 312px;
+			}
+
+			&--alt {
+				@include r(s) {
+					max-width: 312px;
+				}
+			}
+		}
+		&_svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			@include r(s) {
+				display: none;
+			}
+			&--alt {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: none;
+
+				max-width: 312px;
+				@include r(s) {
+					display: block;
+					height: 40px;
+				}
+
+				&[data-input='8'] {
+					height: 60px;
+				}
+				&[data-input='9'] {
+					height: 60px;
+				}
+				&[data-input='10'] {
+					height: 60px;
+				}
+			}
+		}
+	}
+
+	&_aside {
+	}
+
+	&_content {
+		display: grid;
+		grid-template-columns: 600px 1fr;
+		grid-auto-rows: max-content;
+		gap: 30px;
+		@include r(xl) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	&_btn {
+		cursor: pointer;
+		margin-top: 40px;
+		position: relative;
+		&_text {
+			display: block;
+			position: relative;
+			z-index: 2;
+			width: 315px;
+			height: 70px;
+
+			text-transform: uppercase;
+			color: #0c0c0c;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		&_pic {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 315px;
+			height: 70px;
+			object-fit: cover;
+		}
+	}
+}
+
+.aside {
+	padding-top: 100px;
+	width: 785px;
+	height: 100%;
+
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	background: #c1a875;
+	overflow: hidden;
+	@include r(xxl) {
+		width: 100%;
+	}
+	@include r(xl) {
+		position: relative;
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+	@include r(s) {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
+
+	&_wrap {
+		position: relative;
+	}
+
+	&_logo {
+		padding-left: 60px;
+
+		@include r(l) {
+			padding-left: 30px;
+		}
+		@include r(m) {
+			width: 100%;
+		}
+		@include r(s) {
+			padding-left: 15px;
+		}
+	}
+	&_ul {
+		position: relative;
+		z-index: 1;
+
+		padding-left: 60px;
+		display: grid;
+		gap: 1rem;
+
+		width: 100%;
+		max-width: 550px;
+		margin-top: 60px;
+		@include r(l) {
+			padding-left: 30px;
+		}
+		@include r(m) {
+			margin-top: 30px;
+		}
+		@include r(s) {
+			padding-left: 15px;
+		}
+		&--alt {
+			padding-left: 80px;
+			@include r(l) {
+				padding-left: 45px;
+			}
+			@include r(s) {
+				padding-left: 30px;
+			}
+			.aside_li {
+				list-style: disc;
+			}
+		}
+	}
+	&_li {
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		font-size: 18px;
+		@include r(s) {
+			font-size: 12px;
+		}
+	}
+	&_info {
+		position: relative;
+		margin-top: 60px;
+		z-index: 1;
+		@include r(xxl) {
+			width: 100%;
+		}
+		@include r(m) {
+			display: none;
+		}
+
+		&--alt {
+			display: none;
+			@include r(m) {
+				margin-top: 30px;
+
+				position: relative;
+				display: block;
+				width: 100%;
+				z-index: 1;
+			}
+		}
+	}
+	&_btn {
+		position: relative;
+		cursor: pointer;
+		z-index: 1;
+		margin-left: 60px;
+		margin-top: 60px;
+
+		max-width: 390px;
+		width: 100%;
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		border: 2px solid #fff;
+		@include r(l) {
+			margin-left: 30px;
+		}
+		@include r(s) {
+			width: 95%;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 30px;
+			// margin-left: 15px;
+		}
+	}
+	&_bg {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		height: 800px;
+		@include r(l) {
+			height: 60%;
+		}
+		@include r(m) {
+			transform: translate(50%, 0);
+		}
+	}
+}
+
+.footer {
+	margin-top: 120px;
+	&_map {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		&_wrap {
+			position: relative;
+			height: 660px;
+
+			display: flex;
+
+			align-items: flex-end;
+			justify-content: center;
+
+			padding-left: 24px;
+			padding-right: 24px;
+		}
+		&_place {
+			position: relative;
+			margin-bottom: 50px;
+			max-width: 100%;
+		}
+	}
+
+	&_main {
+		padding-top: 50px;
+		padding-bottom: 50px;
+		@include r(l) {
+			padding-top: 25px;
+			padding-bottom: 25px;
+		}
+		@include r(s) {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
+	}
+	&_content {
+		display: flex;
+		align-items: flex-end;
+		gap: 50px;
+	}
+
+	&_info {
+		justify-self: end;
+		max-width: max-content;
+		@include r(l) {
+			justify-self: start;
+			width: 100%;
+			max-width: 100%;
+			display: grid;
+			grid-template-columns: repeat(3, max-content);
+			gap: 30px;
+			justify-content: space-between;
+			align-items: flex-end;
+		}
+		@include r(m) {
+			grid-template-columns: 1fr;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	&_container {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		align-items: center;
+		justify-content: space-between;
+		gap: 30px;
+		@include r(l) {
+			gap: 20px;
+			grid-template-columns: 1fr;
+		}
+	}
+	&_codex {
+		cursor: pointer;
+		width: max-content;
+		text-decoration: underline;
+
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 500;
+		font-size: 16px;
+		@include r(m) {
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+	&_rights {
+		margin-top: 14px;
+		font-size: 10px;
+		font-weight: 500;
+		@include r(l) {
+			margin-top: 0;
+		}
+		@include r(m) {
+			text-align: center;
+		}
+	}
+}

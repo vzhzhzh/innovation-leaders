@@ -1,0 +1,24 @@
+$breakpoints: (
+	's': 576px,
+	'm': 768px,
+	'l': 992px,
+	'xl': 1200px,
+	'xxl': 1400px,
+	'fullhd': 1920px,
+);
+
+$minmax: max;
+
+@mixin r($width, $type: $minmax) {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+
+		@if $type==$minmax {
+			$width: $width - 0.02px;
+		}
+
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
